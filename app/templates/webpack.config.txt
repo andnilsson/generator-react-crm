@@ -1,0 +1,62 @@
+const webpack = require('webpack');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+var path = require('path');
+
+module.exports = {
+    entry: {
+        <%= title %>: "./src/<%= title %>/index.tsx"
+    },
+    output: {
+        filename: "[name].js",             
+        path: path.resolve(__dirname, "<%= namespace %>/build"),
+    },
+    resolve: {
+        extensions: [".ts", ".tsx", ".js", ".scss", ".css"],
+        modules: [
+            'node_modules',
+            path.resolve(__dirname, './node_modules')
+        ]
+    },
+    devtool: "eval",
+    devServer: {
+        contentBase: path.join(__dirname, ""),        
+        publicPath: "/<%= namespace %>/build/",        
+        proxy: {
+            '/api': {
+              target: 'http://localhost:<%= port %>',
+              secure: false
+            }
+        }
+    },
+    module: {
+        rules: [{
+            test: /\.ts(x)?$/,
+            use: [
+                {
+                    loader: 'babel-loader',
+                },
+                {
+                    loader: 'ts-loader'
+                }
+            ]
+        },
+        {
+            test: /\.css$/,
+            use: 'css-loader'
+        },
+        {
+            test: /\.js$/,
+            use: "source-map-loader",
+            enforce: 'pre',
+        },
+        {
+            test: /\.js$/,
+            loader: 'babel-loader'
+        }
+        ],
+    },
+    plugins: [        
+        new UglifyJSPlugin(),
+        new webpack.optimize.AggressiveMergingPlugin(),        
+    ]
+}

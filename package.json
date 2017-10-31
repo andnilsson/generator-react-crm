@@ -1,0 +1,30 @@
+{
+  "name": "generator-react-crm",
+  "version": "1.0.1",
+  "keywords": [
+    "yeoman-generator"
+  ],
+  "files": [
+    "app",
+    "router"
+  ],
+  "description": "A crm webresource with react",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^3.5.0",
+    "deep-extend": "^0.5.0",
+    "inquirer-npm-name": "^2.0.0",
+    "lodash": "^4.17.4",
+    "mkdirp": "^0.5.1",
+    "path": "^0.12.7",
+    "superb": "^2.0.0",
+    "uglifyjs-webpack-plugin": "^1.0.1",
+    "webpack": "^3.8.1",
+    "yeoman-generator": "^2.0.1"
+  }
+}
